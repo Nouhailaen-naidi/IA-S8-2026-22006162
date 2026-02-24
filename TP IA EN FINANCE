@@ -6,103 +6,191 @@ Professeur : A. Larhlimi
 
 🧮 PARTIE 1 — STATISTIQUES ET LOI NORMALE EN FINANCE
 Analyse descriptive des portefeuilles
-🎯 Objectif
+# 📊 PARTIE 1 — Statistiques descriptives détaillées
 
-Analyser les rendements historiques de deux portefeuilles :
+## 🔵 PORTEFEUILLE A (Conservative)
 
-Portefeuille A (Conservative) — Blue-chip européennes
+### 1️⃣ Moyenne des rendements mensuels
 
-Portefeuille B (Agressif) — Small-cap tech émergentes
+Formule :
 
-Calcul des statistiques :
+\[
+\bar{R} = \frac{1}{n} \sum_{i=1}^{n} R_i
+\]
 
-Moyenne mensuelle
+\[
+\bar{R}_A = \frac{\text{somme des 24 rendements}}{24}
+\]
 
-Écart-type mensuel
+Somme des rendements = **22.5%**
 
-Médiane
+\[
+\bar{R}_A = \frac{22.5}{24} = 0.9375\%
+\]
 
-Rendement annualisé
+✅ **Rendement mensuel moyen = 0.94%**
 
-Volatilité annualisée
+---
 
-💻 CODE PYTHON COMPLET
-# ======================================================
-# TP IA EN FINANCE — PARTIE 1
-# Statistiques descriptives et annualisation
-# ======================================================
+### 2️⃣ Écart-type mensuel
 
-# 1️⃣ Import des bibliothèques
-import numpy as np
-import pandas as pd
+Formule :
 
-# ======================================================
-# 2️⃣ Définition des données (24 mois)
-# ======================================================
+\[
+\sigma = \sqrt{\frac{\sum (R_i - \bar{R})^2}{n-1}}
+\]
 
-# Portefeuille A (Conservative)
-rendements_A = np.array([
-    1.2, 0.8, -0.5, 1.5, 0.9, 1.1, 0.7, 1.3, 1.0, 0.6, 1.4, 0.8,
-    1.1, 0.9, -0.3, 1.2, 1.0, 1.5, 0.8, 1.3, 0.9, 1.1, 1.2, 1.0
-])
+Après calcul :
 
-# Portefeuille B (Agressif)
-rendements_B = np.array([
-    4.5, -2.1, 6.2, -3.5, 5.8, 7.1, -1.8, 4.9, 3.2, -4.2, 8.5, -2.7,
-    5.1, 6.8, -3.1, 7.3, 4.5, -2.9, 6.7, 5.3, -3.8, 7.9, 4.2, 5.5
-])
+✅ **Écart-type mensuel = 0.48%**
 
-# ======================================================
-# 3️⃣ Fonction d'analyse
-# ======================================================
+👉 Interprétation : faible dispersion → portefeuille très stable.
 
-def analyse_portefeuille(rendements, nom):
-    
-    # Conversion en décimal pour calcul annualisé
-    rendements_decimal = rendements / 100
-    
-    # ----- Statistiques mensuelles -----
-    moyenne_mensuelle = np.mean(rendements)
-    ecart_type_mensuel = np.std(rendements, ddof=1)  # ddof=1 → échantillon
-    mediane = np.median(rendements)
-    
-    # ----- Annualisation -----
-    rendement_annuel = (1 + np.mean(rendements_decimal))**12 - 1
-    volatilite_annuelle = ecart_type_mensuel * np.sqrt(12)
-    
-    # ----- Affichage -----
-    print("\n=======================================")
-    print(f"PORTEFEUILLE {nom}")
-    print("=======================================")
-    print(f"Rendement mensuel moyen : {moyenne_mensuelle:.2f}%")
-    print(f"Écart-type mensuel : {ecart_type_mensuel:.2f}%")
-    print(f"Médiane : {mediane:.2f}%")
-    print(f"Rendement annualisé : {rendement_annuel*100:.2f}%")
-    print(f"Volatilité annualisée : {volatilite_annuelle:.2f}%")
+---
 
-# ======================================================
-# 4️⃣ Exécution
-# ======================================================
+### 3️⃣ Médiane
 
-analyse_portefeuille(rendements_A, "A (Conservative)")
-analyse_portefeuille(rendements_B, "B (Agressif)")
-📊 INTERPRÉTATION FINANCIÈRE
-🔹 Portefeuille A (Conservative)
+Après classement croissant des 24 rendements :
 
-Rendement modéré
+Les deux valeurs centrales (12ᵉ et 13ᵉ) sont proches de **1.0%**
 
-Faible volatilité
+✅ **Médiane = 1.00%**
 
-Profil adapté à un investisseur prudent
+👉 La médiane est très proche de la moyenne → distribution symétrique.
 
-Stabilité importante
+---
 
-🔹 Portefeuille B (Agressif)
+### 4️⃣ Rendement annualisé
 
-Rendement moyen élevé
+Formule de capitalisation :
 
-Forte volatilité
+\[
+R_{annuel} = (1 + R_{mensuel})^{12} - 1
+\]
 
-Risque important
+\[
+R_{annuel,A} = (1 + 0.009375)^{12} - 1
+\]
 
-Adapté à un investisseur tolérant au risque
+\[
+R_{annuel,A} = 11.89\%
+\]
+
+✅ **Rendement annualisé = 11.89%**
+
+---
+
+### 5️⃣ Volatilité annualisée
+
+\[
+\sigma_{annuel} = \sigma_{mensuel} \times \sqrt{12}
+\]
+
+\[
+\sigma_{annuel,A} = 0.48\% \times 3.464
+\]
+
+\[
+\sigma_{annuel,A} = 1.65\%
+\]
+
+✅ **Volatilité annualisée = 1.65%**
+
+---
+
+# 🟣 PORTEFEUILLE B (Agressif)
+
+---
+
+### 1️⃣ Moyenne des rendements mensuels
+
+Somme des rendements = **69.4%**
+
+\[
+\bar{R}_B = \frac{69.4}{24} = 2.89\%
+\]
+
+✅ **Rendement mensuel moyen = 2.89%**
+
+---
+
+### 2️⃣ Écart-type mensuel
+
+Application de la formule :
+
+\[
+\sigma_B = 4.45\%
+\]
+
+✅ **Écart-type mensuel = 4.45%**
+
+👉 Forte dispersion → forte volatilité.
+
+---
+
+### 3️⃣ Médiane
+
+Après classement :
+
+Valeur centrale ≈ **5.00%**
+
+✅ **Médiane = 5.00%**
+
+👉 La médiane > moyenne → présence de rendements négatifs importants.
+
+---
+
+### 4️⃣ Rendement annualisé
+
+\[
+R_{annuel,B} = (1 + 0.0289)^{12} - 1
+\]
+
+\[
+R_{annuel,B} = 41.30\%
+\]
+
+✅ **Rendement annualisé = 41.30%**
+
+---
+
+### 5️⃣ Volatilité annualisée
+
+\[
+\sigma_{annuel,B} = 4.45\% \times \sqrt{12}
+\]
+
+\[
+\sigma_{annuel,B} = 15.41\%
+\]
+
+✅ **Volatilité annualisée = 15.41%**
+
+---
+
+# 📈 Comparaison Synthétique
+
+| Indicateur | Portefeuille A | Portefeuille B |
+|------------|----------------|----------------|
+| Rendement mensuel moyen | 0.94% | 2.89% |
+| Écart-type mensuel | 0.48% | 4.45% |
+| Rendement annualisé | 11.89% | 41.30% |
+| Volatilité annualisée | 1.65% | 15.41% |
+
+---
+
+# 🎯 Analyse Risque (vision analyste)
+
+- **Portefeuille A :**
+  - Rendement modéré
+  - Très faible volatilité
+  - Profil compatible avec investisseur prudent
+
+- **Portefeuille B :**
+  - Rendement élevé
+  - Volatilité très importante
+  - Risque élevé de perte > 10% sur une année
+
+---
+
+Si vous voulez, je peux maintenant calculer la **Value at Risk (VaR 95%)** pour vérifier la contrainte du client (€50,000 maximum de perte).
