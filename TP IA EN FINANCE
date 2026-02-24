@@ -1,0 +1,141 @@
+TP IA EN FINANCE
+Partie 1 — Question 1.1
+Statistiques descriptives et annualisation
+📌 1️⃣ Import des bibliothèques
+# Import des bibliothèques nécessaires
+import numpy as np
+import pandas as pd
+📌 2️⃣ Définition des données
+# ================================
+# Données historiques (24 mois)
+# ================================
+
+# Portefeuille A (Conservative)
+rendements_A = np.array([
+    1.2, 0.8, -0.5, 1.5, 0.9, 1.1, 0.7, 1.3, 1.0, 0.6, 1.4, 0.8,
+    1.1, 0.9, -0.3, 1.2, 1.0, 1.5, 0.8, 1.3, 0.9, 1.1, 1.2, 1.0
+])
+
+# Portefeuille B (Agressif)
+rendements_B = np.array([
+    4.5, -2.1, 6.2, -3.5, 5.8, 7.1, -1.8, 4.9, 3.2, -4.2, 8.5, -2.7,
+    5.1, 6.8, -3.1, 7.3, 4.5, -2.9, 6.7, 5.3, -3.8, 7.9, 4.2, 5.5
+])
+📌 3️⃣ Fonction de calcul des statistiques
+def analyse_portefeuille(rendements, nom):
+    """
+    Calcule les statistiques descriptives et métriques annualisées
+    """
+
+    # Conversion en décimal (important pour annualisation)
+    rendements_decimal = rendements / 100
+
+    # --- Statistiques mensuelles ---
+    moyenne_mensuelle = np.mean(rendements)
+    ecart_type_mensuel = np.std(rendements, ddof=1)  # ddof=1 → échantillon
+    mediane = np.median(rendements)
+
+    # --- Annualisation ---
+    rendement_annuel = (1 + np.mean(rendements_decimal))**12 - 1
+    volatilite_annuelle = ecart_type_mensuel * np.sqrt(12)
+
+    # --- Affichage formaté ---
+    print(f"\n==============================")
+    print(f"PORTEFEUILLE {nom}")
+    print(f"==============================")
+    print(f"Rendement mensuel moyen : {moyenne_mensuelle:.2f}%")
+    print(f"Écart-type mensuel : {ecart_type_mensuel:.2f}%")
+    print(f"Médiane : {mediane:.2f}%")
+    print(f"Rendement annualisé : {rendement_annuel*100:.2f}%")
+    print(f"Volatilité annualisée : {volatilite_annuelle:.2f}%")
+📌 4️⃣ Exécution de l’analyse
+analyse_portefeuille(rendements_A, "A (Conservative)")
+analyse_portefeuille(rendements_B, "B (Agressif)")
+📈 Explication Finance
+🔹 Moyenne mensuelle
+
+Mesure la performance moyenne par mois.
+
+🔹 Écart-type
+
+Mesure le risque (volatilité).
+
+🔹 Annualisation du rendement
+𝑅
+𝑎
+𝑛
+𝑛
+𝑢
+𝑒
+𝑙
+=
+(
+1
++
+𝑅
+𝑚
+𝑒
+𝑛
+𝑠
+𝑢
+𝑒
+𝑙
+)
+12
+−
+1
+R
+annuel
+	​
+
+=(1+R
+mensuel
+	​
+
+)
+12
+−1
+🔹 Annualisation de la volatilité
+𝜎
+𝑎
+𝑛
+𝑛
+𝑢
+𝑒
+𝑙
+=
+𝜎
+𝑚
+𝑒
+𝑛
+𝑠
+𝑢
+𝑒
+𝑙
+×
+12
+σ
+annuel
+	​
+
+=σ
+mensuel
+	​
+
+×
+12
+	​
+
+🎯 Résultat attendu
+
+Le portefeuille B aura :
+
+✔ Rendement moyen plus élevé
+
+❌ Volatilité beaucoup plus importante
+
+Le portefeuille A sera :
+
+✔ Stable
+
+✔ Adapté au profil conservateur
